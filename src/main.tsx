@@ -3,10 +3,12 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { routeTree } from './routeTree.gen';
+import './i18n';
 export const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
   scrollRestoration: true,
+  defaultNotFoundComponent: () => <div>Page Not Found</div>,
 });
 
 const rootElement = document.getElementById('root')!;

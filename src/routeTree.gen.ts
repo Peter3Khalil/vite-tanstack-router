@@ -8,105 +8,128 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as AboutRouteImport } from './routes/about';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as PostsIndexRouteImport } from './routes/posts/index';
-import { Route as PostsPostIdRouteImport } from './routes/posts/$postId';
+import { createFileRoute } from '@tanstack/react-router';
 
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout';
+import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout.index';
+import { Route as LocaleLayoutAboutRouteImport } from './routes/$locale/_layout.about';
+
+const LocaleRouteImport = createFileRoute('/$locale')();
+
+const LocaleRoute = LocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any);
-const IndexRoute = IndexRouteImport.update({
+const LocaleLayoutRoute = LocaleLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => LocaleRoute,
+} as any);
+const LocaleLayoutIndexRoute = LocaleLayoutIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LocaleLayoutRoute,
 } as any);
-const PostsIndexRoute = PostsIndexRouteImport.update({
-  id: '/posts/',
-  path: '/posts/',
-  getParentRoute: () => rootRouteImport,
-} as any);
-const PostsPostIdRoute = PostsPostIdRouteImport.update({
-  id: '/posts/$postId',
-  path: '/posts/$postId',
-  getParentRoute: () => rootRouteImport,
+const LocaleLayoutAboutRoute = LocaleLayoutAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LocaleLayoutRoute,
 } as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/about': typeof AboutRoute;
-  '/posts/$postId': typeof PostsPostIdRoute;
-  '/posts': typeof PostsIndexRoute;
+  '/$locale': typeof LocaleLayoutRouteWithChildren;
+  '/$locale/about': typeof LocaleLayoutAboutRoute;
+  '/$locale/': typeof LocaleLayoutIndexRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/about': typeof AboutRoute;
-  '/posts/$postId': typeof PostsPostIdRoute;
-  '/posts': typeof PostsIndexRoute;
+  '/$locale': typeof LocaleLayoutIndexRoute;
+  '/$locale/about': typeof LocaleLayoutAboutRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
-  '/': typeof IndexRoute;
-  '/about': typeof AboutRoute;
-  '/posts/$postId': typeof PostsPostIdRoute;
-  '/posts/': typeof PostsIndexRoute;
+  '/$locale': typeof LocaleRouteWithChildren;
+  '/$locale/_layout': typeof LocaleLayoutRouteWithChildren;
+  '/$locale/_layout/about': typeof LocaleLayoutAboutRoute;
+  '/$locale/_layout/': typeof LocaleLayoutIndexRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/about' | '/posts/$postId' | '/posts';
+  fullPaths: '/$locale' | '/$locale/about' | '/$locale/';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/about' | '/posts/$postId' | '/posts';
-  id: '__root__' | '/' | '/about' | '/posts/$postId' | '/posts/';
+  to: '/$locale' | '/$locale/about';
+  id:
+    | '__root__'
+    | '/$locale'
+    | '/$locale/_layout'
+    | '/$locale/_layout/about'
+    | '/$locale/_layout/';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  AboutRoute: typeof AboutRoute;
-  PostsPostIdRoute: typeof PostsPostIdRoute;
-  PostsIndexRoute: typeof PostsIndexRoute;
+  LocaleRoute: typeof LocaleRouteWithChildren;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/about': {
-      id: '/about';
-      path: '/about';
-      fullPath: '/about';
-      preLoaderRoute: typeof AboutRouteImport;
+    '/$locale': {
+      id: '/$locale';
+      path: '/$locale';
+      fullPath: '/$locale';
+      preLoaderRoute: typeof LocaleRouteImport;
       parentRoute: typeof rootRouteImport;
     };
-    '/': {
-      id: '/';
+    '/$locale/_layout': {
+      id: '/$locale/_layout';
+      path: '/$locale';
+      fullPath: '/$locale';
+      preLoaderRoute: typeof LocaleLayoutRouteImport;
+      parentRoute: typeof LocaleRoute;
+    };
+    '/$locale/_layout/': {
+      id: '/$locale/_layout/';
       path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
+      fullPath: '/$locale/';
+      preLoaderRoute: typeof LocaleLayoutIndexRouteImport;
+      parentRoute: typeof LocaleLayoutRoute;
     };
-    '/posts/': {
-      id: '/posts/';
-      path: '/posts';
-      fullPath: '/posts';
-      preLoaderRoute: typeof PostsIndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    '/posts/$postId': {
-      id: '/posts/$postId';
-      path: '/posts/$postId';
-      fullPath: '/posts/$postId';
-      preLoaderRoute: typeof PostsPostIdRouteImport;
-      parentRoute: typeof rootRouteImport;
+    '/$locale/_layout/about': {
+      id: '/$locale/_layout/about';
+      path: '/about';
+      fullPath: '/$locale/about';
+      preLoaderRoute: typeof LocaleLayoutAboutRouteImport;
+      parentRoute: typeof LocaleLayoutRoute;
     };
   }
 }
 
+interface LocaleLayoutRouteChildren {
+  LocaleLayoutAboutRoute: typeof LocaleLayoutAboutRoute;
+  LocaleLayoutIndexRoute: typeof LocaleLayoutIndexRoute;
+}
+
+const LocaleLayoutRouteChildren: LocaleLayoutRouteChildren = {
+  LocaleLayoutAboutRoute: LocaleLayoutAboutRoute,
+  LocaleLayoutIndexRoute: LocaleLayoutIndexRoute,
+};
+
+const LocaleLayoutRouteWithChildren = LocaleLayoutRoute._addFileChildren(
+  LocaleLayoutRouteChildren
+);
+
+interface LocaleRouteChildren {
+  LocaleLayoutRoute: typeof LocaleLayoutRouteWithChildren;
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleLayoutRoute: LocaleLayoutRouteWithChildren,
+};
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren);
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  PostsPostIdRoute: PostsPostIdRoute,
-  PostsIndexRoute: PostsIndexRoute,
+  LocaleRoute: LocaleRouteWithChildren,
 };
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
