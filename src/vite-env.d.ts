@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /// <reference types="vite/client" />
 
 import type { TFunction } from 'i18next';
