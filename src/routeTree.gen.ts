@@ -13,8 +13,8 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Route as rootRouteImport } from './routes/__root';
 import { Route as IndexRouteImport } from './routes/index';
 import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout';
-import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout.index';
-import { Route as LocaleLayoutAboutRouteImport } from './routes/$locale/_layout.about';
+import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout/index';
+import { Route as LocaleLayoutAboutRouteImport } from './routes/$locale/_layout/about';
 
 const LocaleRouteImport = createFileRoute('/$locale')();
 

@@ -13,13 +13,14 @@ export const Route = createFileRoute('/$locale/_layout')({
     const locale = ctx.params.locale;
     if (locale !== 'en' && locale !== 'ar') {
       return notFound();
+    } else {
+      i18next.changeLanguage(locale);
     }
-    i18next.changeLanguage(locale);
   },
 });
 
 function LayoutComponent() {
-  const { locale } = useParams({ from: '/$locale' });
+  const locale = useParams({ from: '/$locale' }).locale;
   useEffect(() => {
     document.documentElement.lang = locale;
     document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
