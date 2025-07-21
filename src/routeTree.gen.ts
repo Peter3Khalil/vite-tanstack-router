@@ -11,6 +11,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 
 import { Route as rootRouteImport } from './routes/__root';
+import { Route as IndexRouteImport } from './routes/index';
 import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout';
 import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout.index';
 import { Route as LocaleLayoutAboutRouteImport } from './routes/$locale/_layout.about';
@@ -20,6 +21,11 @@ const LocaleRouteImport = createFileRoute('/$locale')();
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any);
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any);
 const LocaleLayoutRoute = LocaleLayoutRouteImport.update({
@@ -38,16 +44,19 @@ const LocaleLayoutAboutRoute = LocaleLayoutAboutRouteImport.update({
 } as any);
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute;
   '/$locale': typeof LocaleLayoutRouteWithChildren;
   '/$locale/about': typeof LocaleLayoutAboutRoute;
   '/$locale/': typeof LocaleLayoutIndexRoute;
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute;
   '/$locale': typeof LocaleLayoutIndexRoute;
   '/$locale/about': typeof LocaleLayoutAboutRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
+  '/': typeof IndexRoute;
   '/$locale': typeof LocaleRouteWithChildren;
   '/$locale/_layout': typeof LocaleLayoutRouteWithChildren;
   '/$locale/_layout/about': typeof LocaleLayoutAboutRoute;
@@ -55,11 +64,12 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/$locale' | '/$locale/about' | '/$locale/';
+  fullPaths: '/' | '/$locale' | '/$locale/about' | '/$locale/';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/$locale' | '/$locale/about';
+  to: '/' | '/$locale' | '/$locale/about';
   id:
     | '__root__'
+    | '/'
     | '/$locale'
     | '/$locale/_layout'
     | '/$locale/_layout/about'
@@ -67,6 +77,7 @@ export interface FileRouteTypes {
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute;
   LocaleRoute: typeof LocaleRouteWithChildren;
 }
 
@@ -77,6 +88,13 @@ declare module '@tanstack/react-router' {
       path: '/$locale';
       fullPath: '/$locale';
       preLoaderRoute: typeof LocaleRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
+    '/': {
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     '/$locale/_layout': {
@@ -129,6 +147,7 @@ const LocaleRouteWithChildren =
   LocaleRoute._addFileChildren(LocaleRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
 };
 export const routeTree = rootRouteImport
