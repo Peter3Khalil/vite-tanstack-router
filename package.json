@@ -9,7 +9,7 @@
     "lint": "eslint . --fix",
     "start": "vite preview",
     "format": "prettier --write src",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc -b --noEmit",
     "pre-commit": "pnpm run lint && pnpm run type-check && pnpm run format",
     "prepare": "husky"
   },
