@@ -8,148 +8,160 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router'
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout';
-import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout/index';
-import { Route as LocaleLayoutAboutRouteImport } from './routes/$locale/_layout/about';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout'
+import { Route as LocaleLayoutAuthLayoutRouteImport } from './routes/$locale/_layout/_authLayout'
+import { Route as LocaleLayoutAuthLayoutSignupRouteImport } from './routes/$locale/_layout/_authLayout.signup'
+import { Route as LocaleLayoutAuthLayoutLoginRouteImport } from './routes/$locale/_layout/_authLayout.login'
 
-const LocaleRouteImport = createFileRoute('/$locale')();
+const LocaleRouteImport = createFileRoute('/$locale')()
 
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
   getParentRoute: () => rootRouteImport,
-} as any);
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const LocaleLayoutRoute = LocaleLayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => LocaleRoute,
-} as any);
-const LocaleLayoutIndexRoute = LocaleLayoutIndexRouteImport.update({
-  id: '/',
-  path: '/',
+} as any)
+const LocaleLayoutAuthLayoutRoute = LocaleLayoutAuthLayoutRouteImport.update({
+  id: '/_authLayout',
   getParentRoute: () => LocaleLayoutRoute,
-} as any);
-const LocaleLayoutAboutRoute = LocaleLayoutAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => LocaleLayoutRoute,
-} as any);
+} as any)
+const LocaleLayoutAuthLayoutSignupRoute =
+  LocaleLayoutAuthLayoutSignupRouteImport.update({
+    id: '/signup',
+    path: '/signup',
+    getParentRoute: () => LocaleLayoutAuthLayoutRoute,
+  } as any)
+const LocaleLayoutAuthLayoutLoginRoute =
+  LocaleLayoutAuthLayoutLoginRouteImport.update({
+    id: '/login',
+    path: '/login',
+    getParentRoute: () => LocaleLayoutAuthLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/$locale': typeof LocaleLayoutRouteWithChildren;
-  '/$locale/about': typeof LocaleLayoutAboutRoute;
-  '/$locale/': typeof LocaleLayoutIndexRoute;
+  '/$locale': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale/login': typeof LocaleLayoutAuthLayoutLoginRoute
+  '/$locale/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/$locale': typeof LocaleLayoutIndexRoute;
-  '/$locale/about': typeof LocaleLayoutAboutRoute;
+  '/$locale': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale/login': typeof LocaleLayoutAuthLayoutLoginRoute
+  '/$locale/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  '/': typeof IndexRoute;
-  '/$locale': typeof LocaleRouteWithChildren;
-  '/$locale/_layout': typeof LocaleLayoutRouteWithChildren;
-  '/$locale/_layout/about': typeof LocaleLayoutAboutRoute;
-  '/$locale/_layout/': typeof LocaleLayoutIndexRoute;
+  __root__: typeof rootRouteImport
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/_layout': typeof LocaleLayoutRouteWithChildren
+  '/$locale/_layout/_authLayout': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale/_layout/_authLayout/login': typeof LocaleLayoutAuthLayoutLoginRoute
+  '/$locale/_layout/_authLayout/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/$locale' | '/$locale/about' | '/$locale/';
-  fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/$locale' | '/$locale/about';
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/$locale' | '/$locale/login' | '/$locale/signup'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/$locale' | '/$locale/login' | '/$locale/signup'
   id:
     | '__root__'
-    | '/'
     | '/$locale'
     | '/$locale/_layout'
-    | '/$locale/_layout/about'
-    | '/$locale/_layout/';
-  fileRoutesById: FileRoutesById;
+    | '/$locale/_layout/_authLayout'
+    | '/$locale/_layout/_authLayout/login'
+    | '/$locale/_layout/_authLayout/signup'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  LocaleRoute: typeof LocaleRouteWithChildren;
+  LocaleRoute: typeof LocaleRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/$locale': {
-      id: '/$locale';
-      path: '/$locale';
-      fullPath: '/$locale';
-      preLoaderRoute: typeof LocaleRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$locale/_layout': {
-      id: '/$locale/_layout';
-      path: '/$locale';
-      fullPath: '/$locale';
-      preLoaderRoute: typeof LocaleLayoutRouteImport;
-      parentRoute: typeof LocaleRoute;
-    };
-    '/$locale/_layout/': {
-      id: '/$locale/_layout/';
-      path: '/';
-      fullPath: '/$locale/';
-      preLoaderRoute: typeof LocaleLayoutIndexRouteImport;
-      parentRoute: typeof LocaleLayoutRoute;
-    };
-    '/$locale/_layout/about': {
-      id: '/$locale/_layout/about';
-      path: '/about';
-      fullPath: '/$locale/about';
-      preLoaderRoute: typeof LocaleLayoutAboutRouteImport;
-      parentRoute: typeof LocaleLayoutRoute;
-    };
+      id: '/$locale/_layout'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleLayoutRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/_layout/_authLayout': {
+      id: '/$locale/_layout/_authLayout'
+      path: ''
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleLayoutAuthLayoutRouteImport
+      parentRoute: typeof LocaleLayoutRoute
+    }
+    '/$locale/_layout/_authLayout/signup': {
+      id: '/$locale/_layout/_authLayout/signup'
+      path: '/signup'
+      fullPath: '/$locale/signup'
+      preLoaderRoute: typeof LocaleLayoutAuthLayoutSignupRouteImport
+      parentRoute: typeof LocaleLayoutAuthLayoutRoute
+    }
+    '/$locale/_layout/_authLayout/login': {
+      id: '/$locale/_layout/_authLayout/login'
+      path: '/login'
+      fullPath: '/$locale/login'
+      preLoaderRoute: typeof LocaleLayoutAuthLayoutLoginRouteImport
+      parentRoute: typeof LocaleLayoutAuthLayoutRoute
+    }
   }
 }
 
+interface LocaleLayoutAuthLayoutRouteChildren {
+  LocaleLayoutAuthLayoutLoginRoute: typeof LocaleLayoutAuthLayoutLoginRoute
+  LocaleLayoutAuthLayoutSignupRoute: typeof LocaleLayoutAuthLayoutSignupRoute
+}
+
+const LocaleLayoutAuthLayoutRouteChildren: LocaleLayoutAuthLayoutRouteChildren =
+  {
+    LocaleLayoutAuthLayoutLoginRoute: LocaleLayoutAuthLayoutLoginRoute,
+    LocaleLayoutAuthLayoutSignupRoute: LocaleLayoutAuthLayoutSignupRoute,
+  }
+
+const LocaleLayoutAuthLayoutRouteWithChildren =
+  LocaleLayoutAuthLayoutRoute._addFileChildren(
+    LocaleLayoutAuthLayoutRouteChildren,
+  )
+
 interface LocaleLayoutRouteChildren {
-  LocaleLayoutAboutRoute: typeof LocaleLayoutAboutRoute;
-  LocaleLayoutIndexRoute: typeof LocaleLayoutIndexRoute;
+  LocaleLayoutAuthLayoutRoute: typeof LocaleLayoutAuthLayoutRouteWithChildren
 }
 
 const LocaleLayoutRouteChildren: LocaleLayoutRouteChildren = {
-  LocaleLayoutAboutRoute: LocaleLayoutAboutRoute,
-  LocaleLayoutIndexRoute: LocaleLayoutIndexRoute,
-};
+  LocaleLayoutAuthLayoutRoute: LocaleLayoutAuthLayoutRouteWithChildren,
+}
 
 const LocaleLayoutRouteWithChildren = LocaleLayoutRoute._addFileChildren(
-  LocaleLayoutRouteChildren
-);
+  LocaleLayoutRouteChildren,
+)
 
 interface LocaleRouteChildren {
-  LocaleLayoutRoute: typeof LocaleLayoutRouteWithChildren;
+  LocaleLayoutRoute: typeof LocaleLayoutRouteWithChildren
 }
 
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleLayoutRoute: LocaleLayoutRouteWithChildren,
-};
+}
 
 const LocaleRouteWithChildren =
-  LocaleRoute._addFileChildren(LocaleRouteChildren);
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
