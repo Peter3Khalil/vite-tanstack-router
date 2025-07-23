@@ -1,5 +1,5 @@
 import { Link, usePathname } from '@/shared/i18n/routing';
-import { useLocation } from '@tanstack/react-router';
+import { useLocation, useParams } from '@tanstack/react-router';
 import i18next from 'i18next';
 import { type FC } from 'react';
 type Props = Omit<
@@ -7,7 +7,9 @@ type Props = Omit<
   'href' | 'locale' | 'preload'
 >;
 const LanguageSwitcher: FC<Props> = ({ className, children, ...props }) => {
-  const locale = i18next.language;
+  const locale =
+    useParams({ from: '/$locale', shouldThrow: false })?.locale ||
+    i18next.language;
   const pathname = usePathname();
   const { searchStr } = useLocation();
   return (

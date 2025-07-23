@@ -1,21 +1,34 @@
+import LanguageSwitcher from '@components/language-switcher';
 import { cn } from '@lib/utils';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const Route = createFileRoute('/$locale/_layout/_authLayout')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
+  const [flip, setFlip] = useState(false);
+  const { t } = useTranslation();
   return (
-    <div className="grid min-h-svh lg:grid-cols-2">
-      <div className={cn('flex w-full flex-col gap-4 p-6 md:p-10')}>
+    <div className="relative min-h-svh *:min-h-svh *:transition-all *:duration-500 *:ease-in-out">
+      <section
+        className={cn(
+          'flex w-full flex-col gap-4 p-6 md:p-10 lg:absolute lg:w-1/2',
+          {
+            'left-1/2': flip,
+            'left-0': !flip,
+          }
+        )}
+      >
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
             </div>
-            English Home
+            {t('Global.english-home')}
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
@@ -23,14 +36,24 @@ function RouteComponent() {
             <Outlet />
           </div>
         </div>
-      </div>
-      <div
+      </section>
+      <section
         className={cn(
-          'bg-primary dark:bg-muted hidden lg:flex lg:flex-col lg:items-center lg:justify-center'
+          'bg-primary dark:bg-muted absolute hidden lg:flex lg:w-1/2 lg:flex-col lg:items-center lg:justify-center',
+          {
+            'right-0': !flip,
+            'right-1/2': flip,
+          }
         )}
       >
+        <LanguageSwitcher
+          onClick={() => {
+            setFlip(!flip);
+          }}
+          className="text-primary-foreground"
+        />
         <EnglishHomeSVG />
-      </div>
+      </section>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { cn } from '@lib/utils';
 import { Button } from '@ui/button';
 import { Form } from '@ui/form';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import z from 'zod';
 
 const formSchema = z.object({
@@ -26,6 +27,8 @@ export function SignupForm({
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log('Form submitted with values:', values);
   }
+
+  const { t } = useTranslation();
   return (
     <Form {...form}>
       <form
@@ -34,61 +37,62 @@ export function SignupForm({
         {...props}
       >
         <div className="flex flex-col items-center gap-2 text-center">
-          <h1 className="text-2xl font-bold">Create your account</h1>
+          <h1 className="text-2xl font-bold">{t('Auth.signup-form.title')}</h1>
           <p className="text-muted-foreground text-balance text-sm">
-            Enter your information below to create your account
+            {t('Auth.signup-form.description')}
           </p>
         </div>
         <div className="grid gap-6">
           <div className="grid grid-cols-2 gap-4">
             <InputFormField
               name="firstName"
-              label="First Name"
-              placeholder="John"
+              label={t('Auth.signup-form.first-name-label')}
+              placeholder={t('Auth.signup-form.first-name-placeholder')}
               control={form.control}
             />
             <InputFormField
               name="lastName"
-              label="Last Name"
-              placeholder="Doe"
+              label={t('Auth.signup-form.last-name-label')}
+              placeholder={t('Auth.signup-form.last-name-placeholder')}
               control={form.control}
             />
           </div>
           <InputFormField
             name="email"
-            label="Email"
-            placeholder="you@example.com"
+            label={t('Auth.signup-form.email-label')}
+            placeholder={t('Auth.signup-form.email-placeholder')}
             control={form.control}
           />
           <InputFormField
             name="password"
-            label="Password"
+            label={t('Auth.signup-form.password-label')}
+            placeholder={t('Auth.signup-form.password-placeholder')}
             control={form.control}
             type="password"
           />
           <Button type="submit" className="w-full">
-            Sign Up
+            {t('Auth.signup-form.signup-button')}
           </Button>
           <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
             <span className="bg-background text-muted-foreground relative z-10 px-2">
-              Or continue with
+              {t('Auth.or-continue')}
             </span>
           </div>
           <div>
             <Button variant="outline" type="button" className="w-full">
               <GoogleIcon />
-              Sign up with Google
+              {t('Auth.signup-form.signup-with-google')}
             </Button>
             <Button variant="outline" type="button" className="mt-3 w-full">
               <FacebookIcon />
-              Sign up with Facebook
+              {t('Auth.signup-form.signup-with-facebook')}
             </Button>
           </div>
         </div>
         <div className="text-center text-sm">
-          Already have an account?{' '}
+          {t('Auth.signup-form.has-account')}{' '}
           <Link to="/login" className="underline underline-offset-4">
-            Sign in
+            {t('Auth.signup-form.login-link')}
           </Link>
         </div>
       </form>

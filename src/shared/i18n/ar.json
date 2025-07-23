@@ -1,7 +1,39 @@
 {
-  "welcome": " مرحبًا بكم في تطبيقنا!",
-  "nav": {
-    "home": "الرئيسية",
-    "about": "حول"
+  "Auth": {
+    "login-form": {
+      "title": "تسجيل الدخول إلى حسابك",
+      "description": "أدخل بيانات اعتماد تسجيل الدخول الخاصة بك للوصول إلى حسابك.",
+      "email-label": "البريد الإلكتروني",
+      "email-placeholder": "أدخل بريدك الإلكتروني",
+      "password-label": "كلمة المرور",
+      "password-placeholder": "أدخل كلمة المرور الخاصة بك",
+      "login-button": "تسجيل الدخول",
+      "forgot-password": "هل نسيت كلمة المرور؟",
+      "no-account": "ليس لديك حساب؟",
+      "register-link": "سجل الآن",
+      "login-with-facebook": "سجل دخول بحساب فيسبوك",
+      "login-with-google": "سجل دخول بحساب جوجل"
+    },
+    "signup-form": {
+      "title": "أنشئ حساب جديد",
+      "description": "قم بإدخال البيانات المطلوبة لإنشاء حسابك",
+      "first-name-label": "الاسم الأول",
+      "first-name-placeholder": "محمد",
+      "last-name-label": "الاسم الاخير",
+      "last-name-placeholder": "صلاح",
+      "email-label": "البريد الإلكتروني",
+      "email-placeholder": "أدخل بريدك الإلكتروني",
+      "password-label": "كلمة المرور",
+      "password-placeholder": "أدخل كلمة المرور الخاصة بك",
+      "signup-button": "تسجيل الحساب",
+      "has-account": "هل لديك حساب بالفعل؟",
+      "login-link": "سجل دخول الآن",
+      "signup-with-facebook": "سجل بحساب فيسبوك",
+      "signup-with-google": "سجل بحساب جوجل"
+    },
+    "or-continue": "أو يمكنك التسجيل بواسطة"
+  },
+  "Global": {
+    "english-home": "إنجلش هوم"
   }
 }
