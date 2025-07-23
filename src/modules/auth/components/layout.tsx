@@ -1,15 +1,14 @@
 import LanguageSwitcher from '@components/language-switcher';
 import { cn } from '@lib/utils';
-import { createFileRoute, Outlet, useParams } from '@tanstack/react-router';
+import { useParams } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
-import { useState } from 'react';
+import React, { useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
+type Props = {
+  children?: React.ReactNode;
+};
 
-export const Route = createFileRoute('/$locale/_layout/_authLayout')({
-  component: RouteComponent,
-});
-
-function RouteComponent() {
+const Layout: FC<Props> = ({ children }) => {
   const locale = useParams({ from: '/$locale' }).locale;
   const [flip, setFlip] = useState(locale === 'ar');
   const { t } = useTranslation();
@@ -39,9 +38,7 @@ function RouteComponent() {
           />
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-md">
-            <Outlet />
-          </div>
+          <div className="w-full max-w-md">{children}</div>
         </div>
       </section>
       <section
@@ -63,7 +60,7 @@ function RouteComponent() {
       </section>
     </div>
   );
-}
+};
 
 export const EnglishHomeSVG: React.FC<React.SVGProps<SVGSVGElement>> = ({
   className,
@@ -338,3 +335,5 @@ export const EnglishHomeSVG: React.FC<React.SVGProps<SVGSVGElement>> = ({
     </svg>
   );
 };
+
+export default Layout;

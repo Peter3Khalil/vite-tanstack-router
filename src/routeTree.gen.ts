@@ -14,9 +14,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout'
 import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout/index'
-import { Route as LocaleLayoutAuthLayoutRouteImport } from './routes/$locale/_layout/_authLayout'
-import { Route as LocaleLayoutAuthLayoutSignupRouteImport } from './routes/$locale/_layout/_authLayout.signup'
-import { Route as LocaleLayoutAuthLayoutLoginRouteImport } from './routes/$locale/_layout/_authLayout.login'
+import { Route as LocaleLayoutSignupRouteImport } from './routes/$locale/_layout/signup'
+import { Route as LocaleLayoutLoginRouteImport } from './routes/$locale/_layout/login'
 
 const LocaleRouteImport = createFileRoute('/$locale')()
 
@@ -39,54 +38,47 @@ const LocaleLayoutIndexRoute = LocaleLayoutIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LocaleLayoutRoute,
 } as any)
-const LocaleLayoutAuthLayoutRoute = LocaleLayoutAuthLayoutRouteImport.update({
-  id: '/_authLayout',
+const LocaleLayoutSignupRoute = LocaleLayoutSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
   getParentRoute: () => LocaleLayoutRoute,
 } as any)
-const LocaleLayoutAuthLayoutSignupRoute =
-  LocaleLayoutAuthLayoutSignupRouteImport.update({
-    id: '/signup',
-    path: '/signup',
-    getParentRoute: () => LocaleLayoutAuthLayoutRoute,
-  } as any)
-const LocaleLayoutAuthLayoutLoginRoute =
-  LocaleLayoutAuthLayoutLoginRouteImport.update({
-    id: '/login',
-    path: '/login',
-    getParentRoute: () => LocaleLayoutAuthLayoutRoute,
-  } as any)
+const LocaleLayoutLoginRoute = LocaleLayoutLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => LocaleLayoutRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/$locale': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale': typeof LocaleLayoutRouteWithChildren
+  '/$locale/login': typeof LocaleLayoutLoginRoute
+  '/$locale/signup': typeof LocaleLayoutSignupRoute
   '/$locale/': typeof LocaleLayoutIndexRoute
-  '/$locale/login': typeof LocaleLayoutAuthLayoutLoginRoute
-  '/$locale/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleLayoutIndexRoute
-  '/$locale/login': typeof LocaleLayoutAuthLayoutLoginRoute
-  '/$locale/signup': typeof LocaleLayoutAuthLayoutSignupRoute
+  '/$locale/login': typeof LocaleLayoutLoginRoute
+  '/$locale/signup': typeof LocaleLayoutSignupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/_layout': typeof LocaleLayoutRouteWithChildren
-  '/$locale/_layout/_authLayout': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale/_layout/login': typeof LocaleLayoutLoginRoute
+  '/$locale/_layout/signup': typeof LocaleLayoutSignupRoute
   '/$locale/_layout/': typeof LocaleLayoutIndexRoute
-  '/$locale/_layout/_authLayout/login': typeof LocaleLayoutAuthLayoutLoginRoute
-  '/$locale/_layout/_authLayout/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/$locale'
-    | '/$locale/'
     | '/$locale/login'
     | '/$locale/signup'
+    | '/$locale/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/$locale' | '/$locale/login' | '/$locale/signup'
   id:
@@ -94,10 +86,9 @@ export interface FileRouteTypes {
     | '/'
     | '/$locale'
     | '/$locale/_layout'
-    | '/$locale/_layout/_authLayout'
+    | '/$locale/_layout/login'
+    | '/$locale/_layout/signup'
     | '/$locale/_layout/'
-    | '/$locale/_layout/_authLayout/login'
-    | '/$locale/_layout/_authLayout/signup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -135,53 +126,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleLayoutIndexRouteImport
       parentRoute: typeof LocaleLayoutRoute
     }
-    '/$locale/_layout/_authLayout': {
-      id: '/$locale/_layout/_authLayout'
-      path: ''
-      fullPath: '/$locale'
-      preLoaderRoute: typeof LocaleLayoutAuthLayoutRouteImport
-      parentRoute: typeof LocaleLayoutRoute
-    }
-    '/$locale/_layout/_authLayout/signup': {
-      id: '/$locale/_layout/_authLayout/signup'
+    '/$locale/_layout/signup': {
+      id: '/$locale/_layout/signup'
       path: '/signup'
       fullPath: '/$locale/signup'
-      preLoaderRoute: typeof LocaleLayoutAuthLayoutSignupRouteImport
-      parentRoute: typeof LocaleLayoutAuthLayoutRoute
+      preLoaderRoute: typeof LocaleLayoutSignupRouteImport
+      parentRoute: typeof LocaleLayoutRoute
     }
-    '/$locale/_layout/_authLayout/login': {
-      id: '/$locale/_layout/_authLayout/login'
+    '/$locale/_layout/login': {
+      id: '/$locale/_layout/login'
       path: '/login'
       fullPath: '/$locale/login'
-      preLoaderRoute: typeof LocaleLayoutAuthLayoutLoginRouteImport
-      parentRoute: typeof LocaleLayoutAuthLayoutRoute
+      preLoaderRoute: typeof LocaleLayoutLoginRouteImport
+      parentRoute: typeof LocaleLayoutRoute
     }
   }
 }
 
-interface LocaleLayoutAuthLayoutRouteChildren {
-  LocaleLayoutAuthLayoutLoginRoute: typeof LocaleLayoutAuthLayoutLoginRoute
-  LocaleLayoutAuthLayoutSignupRoute: typeof LocaleLayoutAuthLayoutSignupRoute
-}
-
-const LocaleLayoutAuthLayoutRouteChildren: LocaleLayoutAuthLayoutRouteChildren =
-  {
-    LocaleLayoutAuthLayoutLoginRoute: LocaleLayoutAuthLayoutLoginRoute,
-    LocaleLayoutAuthLayoutSignupRoute: LocaleLayoutAuthLayoutSignupRoute,
-  }
-
-const LocaleLayoutAuthLayoutRouteWithChildren =
-  LocaleLayoutAuthLayoutRoute._addFileChildren(
-    LocaleLayoutAuthLayoutRouteChildren,
-  )
-
 interface LocaleLayoutRouteChildren {
-  LocaleLayoutAuthLayoutRoute: typeof LocaleLayoutAuthLayoutRouteWithChildren
+  LocaleLayoutLoginRoute: typeof LocaleLayoutLoginRoute
+  LocaleLayoutSignupRoute: typeof LocaleLayoutSignupRoute
   LocaleLayoutIndexRoute: typeof LocaleLayoutIndexRoute
 }
 
 const LocaleLayoutRouteChildren: LocaleLayoutRouteChildren = {
-  LocaleLayoutAuthLayoutRoute: LocaleLayoutAuthLayoutRouteWithChildren,
+  LocaleLayoutLoginRoute: LocaleLayoutLoginRoute,
+  LocaleLayoutSignupRoute: LocaleLayoutSignupRoute,
   LocaleLayoutIndexRoute: LocaleLayoutIndexRoute,
 }
 
