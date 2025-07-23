@@ -1,6 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Inconsolata:wght@200..900&family=Mada:wght@200..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
-
 @custom-variant dark (&:is(.dark *));
 
 :root {
@@ -43,6 +43,9 @@
   --font-mono:
     'Geist Mono', 'Geist Mono Fallback', ui-monospace, SFMono-Regular, Menlo,
     Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  --font-cairo: 'Cairo', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 
   --radius: 0.5rem;
 
@@ -143,6 +146,8 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
+  --font-cairo: var(--font-cairo);
+  --font-inter: var(--font-inter);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -157,4 +162,11 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+}
+
+:lang(ar) {
+  font-family: var(--font-cairo);
+}
+:lang(en) {
+  font-family: var(--font-inter);
 }
