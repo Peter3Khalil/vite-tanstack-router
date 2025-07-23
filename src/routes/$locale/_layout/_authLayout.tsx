@@ -1,4 +1,4 @@
-import { cn } from '@lib/utils';
+import { cn } from '@/shared/lib/utils';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
 
@@ -12,7 +12,7 @@ function RouteComponent() {
       <div className={cn('flex w-full flex-col gap-4 p-6 md:p-10')}>
         <div className="flex justify-center gap-2 md:justify-start">
           <a href="#" className="flex items-center gap-2 font-medium">
-            <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground">
+            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
             </div>
             English Home
@@ -26,7 +26,7 @@ function RouteComponent() {
       </div>
       <div
         className={cn(
-          'hidden bg-primary lg:flex lg:flex-col lg:items-center lg:justify-center dark:bg-muted'
+          'bg-primary dark:bg-muted hidden lg:flex lg:flex-col lg:items-center lg:justify-center'
         )}
       >
         <EnglishHomeSVG />

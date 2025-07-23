@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Link } from '@/i18n/routing';
-import { cn } from '@/lib/utils';
+import { Button } from '@/shared/components/ui/button';
+import { Input } from '@/shared/components/ui/input';
+import { Label } from '@/shared/components/ui/label';
+import { Link } from '@/shared/i18n/routing';
+import { cn } from '@/shared/lib/utils';
 
 export function SignupForm({
   className,
@@ -12,7 +12,7 @@ export function SignupForm({
     <form className={cn('flex flex-col gap-6', className)} {...props}>
       <div className="flex flex-col items-center gap-2 text-center">
         <h1 className="text-2xl font-bold">Create your account</h1>
-        <p className="text-sm text-balance text-muted-foreground">
+        <p className="text-muted-foreground text-balance text-sm">
           Enter your information below to create your account
         </p>
       </div>
@@ -38,8 +38,8 @@ export function SignupForm({
         <Button type="submit" className="w-full">
           Sign Up
         </Button>
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
+        <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+          <span className="bg-background text-muted-foreground relative z-10 px-2">
             Or continue with
           </span>
         </div>

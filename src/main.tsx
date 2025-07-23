@@ -1,9 +1,9 @@
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './styles/index.css';
 import { routeTree } from './routeTree.gen';
-import './i18n';
+import './shared/i18n';
 export const router = createRouter({
   routeTree,
   defaultPreload: 'intent',
