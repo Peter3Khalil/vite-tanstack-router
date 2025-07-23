@@ -3,12 +3,6 @@
     "login-form": {
       "title": "تسجيل الدخول إلى حسابك",
       "description": "أدخل بيانات اعتماد تسجيل الدخول الخاصة بك للوصول إلى حسابك.",
-      "email-label": "البريد الإلكتروني",
-      "email-placeholder": "أدخل بريدك الإلكتروني",
-      "email-error": "يرجى إدخال بريد إلكتروني صالح",
-      "password-label": "كلمة المرور",
-      "password-placeholder": "أدخل كلمة المرور الخاصة بك",
-      "password-error": "يجب أن تكون كلمة المرور على الأقل {{maxLen}} أحرف",
       "login-button": "تسجيل الدخول",
       "forgot-password": "هل نسيت كلمة المرور؟",
       "no-account": "ليس لديك حساب؟",
@@ -23,20 +17,32 @@
       "first-name-placeholder": "محمد",
       "last-name-label": "الاسم الاخير",
       "last-name-placeholder": "صلاح",
-      "email-label": "البريد الإلكتروني",
-      "email-placeholder": "أدخل بريدك الإلكتروني",
-      "password-label": "كلمة المرور",
-      "password-placeholder": "أدخل كلمة المرور الخاصة بك",
       "signup-button": "تسجيل الحساب",
       "has-account": "هل لديك حساب بالفعل؟",
       "login-link": "سجل دخول الآن",
       "signup-with-facebook": "سجل بحساب فيسبوك",
       "signup-with-google": "سجل بحساب جوجل"
     },
-    "or-continue": "أو يمكنك التسجيل بواسطة",
-    "required-error": "هذا الحقل مطلوب"
+    "or-continue": "أو يمكنك التسجيل بواسطة"
   },
   "Global": {
-    "english-home": "إنجلش هوم"
+    "english-home": "إنجلش هوم",
+    "form-fields": {
+      "required-error": "هذا الحقل مطلوب",
+      "min-error": "يجب أن يكون هذا الحقل على الأقل {{min}} أحرف",
+      "max-error": "يجب أن يكون هذا الحقل على الأكثر {{max}} أحرف",
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني",
+        "error": "يرجى إدخال بريد إلكتروني صالح",
+        "required-error": "البريد الإلكتروني مطلوب"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور الخاصة بك",
+        "min-error": "يجب أن تكون كلمة المرور على الأقل {{min}} أحرف",
+        "required-error": "كلمة المرور مطلوبة"
+      }
+    }
   }
 }

@@ -13,10 +13,10 @@ import Layout from './layout';
 const useLocalizedSchema = () => {
   const { t } = useTranslation();
   return z.object({
-    email: z.email(t('Auth.login-form.email-error')),
+    email: z.email(t('Global.form-fields.email.error')),
     password: z
-      .string({ error: t('Auth.required-error') })
-      .min(6, t('Auth.login-form.password-error', { maxLen: 6 })),
+      .string({ error: t('Global.form-fields.password.required-error') })
+      .min(6, t('Global.form-fields.password.min-error', { min: 6 })),
   });
 };
 
@@ -52,13 +52,13 @@ export function LoginForm({
           <div className="grid gap-6">
             <InputFormField
               name="email"
-              label={t('Auth.login-form.email-label')}
+              label={t('Global.form-fields.email.label')}
               control={form.control}
             />
             <div className="grid gap-3">
               <div className="flex items-center">
                 <Label htmlFor="password">
-                  {t('Auth.login-form.password-label')}
+                  {t('Global.form-fields.password.label')}
                 </Label>
                 <a
                   href="#"

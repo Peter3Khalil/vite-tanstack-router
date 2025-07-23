@@ -10,17 +10,23 @@ import { useTranslation } from 'react-i18next';
 import z from 'zod';
 import Layout from './layout';
 
-const formSchema = z.object({
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  email: z.email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters long'),
-});
+const useLocalizedSchema = () => {
+  const { t } = useTranslation();
+  return z.object({
+    firstName: z.string(t('Global.form-fields.required-error')).min(1),
+    lastName: z.string(t('Global.form-fields.required-error')).min(1),
+    email: z.email(t('Global.form-fields.email.error')),
+    password: z
+      .string({ error: t('Global.form-fields.password.required-error') })
+      .min(6, t('Global.form-fields.password.min-error', { min: 6 })),
+  });
+};
 
 export function SignupForm({
   className,
   ...props
 }: React.ComponentProps<'form'>) {
+  const formSchema = useLocalizedSchema();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
@@ -63,14 +69,14 @@ export function SignupForm({
             </div>
             <InputFormField
               name="email"
-              label={t('Auth.signup-form.email-label')}
-              placeholder={t('Auth.signup-form.email-placeholder')}
+              label={t('Global.form-fields.email.label')}
+              placeholder={t('Global.form-fields.email.placeholder')}
               control={form.control}
             />
             <InputFormField
               name="password"
-              label={t('Auth.signup-form.password-label')}
-              placeholder={t('Auth.signup-form.password-placeholder')}
+              label={t('Global.form-fields.password.label')}
+              placeholder={t('Global.form-fields.password.placeholder')}
               control={form.control}
               type="password"
             />

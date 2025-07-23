@@ -1,15 +1,9 @@
 {
   "Auth": {
     "login-form": {
-      "title": "Log in to your account",
+      "title": "Login to your account",
       "description": "Enter your login credentials to access your account.",
-      "email-label": "Email",
-      "email-placeholder": "Enter your email",
-      "email-error": "Please enter a valid email",
-      "password-label": "Password",
-      "password-placeholder": "Enter your password",
-      "password-error": "Password must be at least {{maxLen}} characters long",
-      "login-button": "Log in",
+      "login-button": "Login",
       "forgot-password": "Forgot password?",
       "no-account": "Don't have an account?",
       "register-link": "Register now",
@@ -17,26 +11,38 @@
       "login-with-google": "Login with Google"
     },
     "signup-form": {
-      "title": "Create your account",
-      "description": "Enter your information below to create your account",
+      "title": "Create a new account",
+      "description": "Enter the required information to create your account",
       "first-name-label": "First Name",
       "first-name-placeholder": "Mohammed",
       "last-name-label": "Last Name",
       "last-name-placeholder": "Salah",
-      "email-label": "Email",
-      "email-placeholder": "Enter your email",
-      "password-label": "Password",
-      "password-placeholder": "Enter your password",
-      "signup-button": "Signup",
+      "signup-button": "Register Account",
       "has-account": "Already have an account?",
-      "login-link": "Login Now",
-      "signup-with-facebook": "Signup with Facebook",
-      "signup-with-google": "Signup with Google"
+      "login-link": "Login now",
+      "signup-with-facebook": "Sign up with Facebook",
+      "signup-with-google": "Sign up with Google"
     },
-    "or-continue": "Or continue with",
-    "required-error": "This field is required"
+    "or-continue": "Or you can register with"
   },
   "Global": {
-    "english-home": "English Home"
+    "english-home": "English Home",
+    "form-fields": {
+      "required-error": "This field is required",
+      "min-error": "This field must be at least {{min}} characters",
+      "max-error": "This field must be at most {{max}} characters",
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email",
+        "error": "Please enter a valid email",
+        "required-error": "Email is required"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password",
+        "min-error": "Password must be at least {{min}} characters",
+        "required-error": "Password is required"
+      }
+    }
   }
 }
