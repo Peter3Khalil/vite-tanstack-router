@@ -13,10 +13,10 @@ const Layout: FC<Props> = ({ children }) => {
   const [flip, setFlip] = useState(locale === 'ar');
   const { t } = useTranslation();
   return (
-    <div className="relative min-h-svh *:min-h-svh *:transition-all *:duration-500 *:ease-in-out">
+    <div className="relative min-h-svh *:h-svh *:transition-all *:duration-500 *:ease-in-out">
       <section
         className={cn(
-          'flex w-full flex-col gap-4 p-6 md:p-10 lg:absolute lg:w-1/2',
+          'flex w-full flex-col gap-4 overflow-auto p-6 md:p-10 lg:absolute lg:w-1/2',
           {
             'left-1/2': flip,
             'left-0': !flip,
