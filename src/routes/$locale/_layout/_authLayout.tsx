@@ -24,13 +24,19 @@ function RouteComponent() {
           }
         )}
       >
-        <div className="flex justify-center gap-2 md:justify-start">
+        <div className="flex justify-center gap-2">
           <a href="#" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
             </div>
             {t('Global.english-home')}
           </a>
+          <LanguageSwitcher
+            onClick={() => {
+              setFlip(!flip);
+            }}
+            className="bg-accent text-foreground absolute top-4 rounded-md px-4 py-1 font-bold lg:hidden ltr:left-4 rtl:right-4"
+          />
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-md">
@@ -51,7 +57,7 @@ function RouteComponent() {
           onClick={() => {
             setFlip(!flip);
           }}
-          className="text-primary-foreground"
+          className="bg-background text-foreground absolute top-4 rounded-md px-4 py-1 font-bold ltr:left-4 rtl:right-4"
         />
         <EnglishHomeSVG />
       </section>
