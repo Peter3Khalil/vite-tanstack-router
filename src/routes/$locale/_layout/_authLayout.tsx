@@ -1,6 +1,6 @@
 import LanguageSwitcher from '@components/language-switcher';
 import { cn } from '@lib/utils';
-import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { createFileRoute, Outlet, useParams } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,8 @@ export const Route = createFileRoute('/$locale/_layout/_authLayout')({
 });
 
 function RouteComponent() {
-  const [flip, setFlip] = useState(false);
+  const locale = useParams({ from: '/$locale' }).locale;
+  const [flip, setFlip] = useState(locale === 'ar');
   const { t } = useTranslation();
   return (
     <div className="relative min-h-svh *:min-h-svh *:transition-all *:duration-500 *:ease-in-out">
