@@ -11,7 +11,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleLayoutRouteImport } from './routes/$locale/_layout'
+import { Route as LocaleLayoutIndexRouteImport } from './routes/$locale/_layout/index'
 import { Route as LocaleLayoutAuthLayoutRouteImport } from './routes/$locale/_layout/_authLayout'
 import { Route as LocaleLayoutAuthLayoutSignupRouteImport } from './routes/$locale/_layout/_authLayout.signup'
 import { Route as LocaleLayoutAuthLayoutLoginRouteImport } from './routes/$locale/_layout/_authLayout.login'
@@ -23,9 +25,19 @@ const LocaleRoute = LocaleRouteImport.update({
   path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LocaleLayoutRoute = LocaleLayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleLayoutIndexRoute = LocaleLayoutIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleLayoutRoute,
 } as any)
 const LocaleLayoutAuthLayoutRoute = LocaleLayoutAuthLayoutRouteImport.update({
   id: '/_authLayout',
@@ -45,38 +57,51 @@ const LocaleLayoutAuthLayoutLoginRoute =
   } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/$locale': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale/': typeof LocaleLayoutIndexRoute
   '/$locale/login': typeof LocaleLayoutAuthLayoutLoginRoute
   '/$locale/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRoutesByTo {
-  '/$locale': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/': typeof IndexRoute
+  '/$locale': typeof LocaleLayoutIndexRoute
   '/$locale/login': typeof LocaleLayoutAuthLayoutLoginRoute
   '/$locale/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/_layout': typeof LocaleLayoutRouteWithChildren
   '/$locale/_layout/_authLayout': typeof LocaleLayoutAuthLayoutRouteWithChildren
+  '/$locale/_layout/': typeof LocaleLayoutIndexRoute
   '/$locale/_layout/_authLayout/login': typeof LocaleLayoutAuthLayoutLoginRoute
   '/$locale/_layout/_authLayout/signup': typeof LocaleLayoutAuthLayoutSignupRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/$locale' | '/$locale/login' | '/$locale/signup'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/$locale/'
+    | '/$locale/login'
+    | '/$locale/signup'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$locale' | '/$locale/login' | '/$locale/signup'
+  to: '/' | '/$locale' | '/$locale/login' | '/$locale/signup'
   id:
     | '__root__'
+    | '/'
     | '/$locale'
     | '/$locale/_layout'
     | '/$locale/_layout/_authLayout'
+    | '/$locale/_layout/'
     | '/$locale/_layout/_authLayout/login'
     | '/$locale/_layout/_authLayout/signup'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
 }
 
@@ -89,12 +114,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$locale/_layout': {
       id: '/$locale/_layout'
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleLayoutRouteImport
       parentRoute: typeof LocaleRoute
+    }
+    '/$locale/_layout/': {
+      id: '/$locale/_layout/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleLayoutIndexRouteImport
+      parentRoute: typeof LocaleLayoutRoute
     }
     '/$locale/_layout/_authLayout': {
       id: '/$locale/_layout/_authLayout'
@@ -138,10 +177,12 @@ const LocaleLayoutAuthLayoutRouteWithChildren =
 
 interface LocaleLayoutRouteChildren {
   LocaleLayoutAuthLayoutRoute: typeof LocaleLayoutAuthLayoutRouteWithChildren
+  LocaleLayoutIndexRoute: typeof LocaleLayoutIndexRoute
 }
 
 const LocaleLayoutRouteChildren: LocaleLayoutRouteChildren = {
   LocaleLayoutAuthLayoutRoute: LocaleLayoutAuthLayoutRouteWithChildren,
+  LocaleLayoutIndexRoute: LocaleLayoutIndexRoute,
 }
 
 const LocaleLayoutRouteWithChildren = LocaleLayoutRoute._addFileChildren(
@@ -160,6 +201,7 @@ const LocaleRouteWithChildren =
   LocaleRoute._addFileChildren(LocaleRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
 }
 export const routeTree = rootRouteImport
