@@ -5,8 +5,10 @@
       "description": "Enter your login credentials to access your account.",
       "email-label": "Email",
       "email-placeholder": "Enter your email",
+      "email-error": "Please enter a valid email",
       "password-label": "Password",
       "password-placeholder": "Enter your password",
+      "password-error": "Password must be at least {{maxLen}} characters long",
       "login-button": "Log in",
       "forgot-password": "Forgot password?",
       "no-account": "Don't have an account?",
@@ -31,7 +33,8 @@
       "signup-with-facebook": "Signup with Facebook",
       "signup-with-google": "Signup with Google"
     },
-    "or-continue": "Or continue with"
+    "or-continue": "Or continue with",
+    "required-error": "This field is required"
   },
   "Global": {
     "english-home": "English Home"

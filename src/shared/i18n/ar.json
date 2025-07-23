@@ -5,8 +5,10 @@
       "description": "أدخل بيانات اعتماد تسجيل الدخول الخاصة بك للوصول إلى حسابك.",
       "email-label": "البريد الإلكتروني",
       "email-placeholder": "أدخل بريدك الإلكتروني",
+      "email-error": "يرجى إدخال بريد إلكتروني صالح",
       "password-label": "كلمة المرور",
       "password-placeholder": "أدخل كلمة المرور الخاصة بك",
+      "password-error": "يجب أن تكون كلمة المرور على الأقل {{maxLen}} أحرف",
       "login-button": "تسجيل الدخول",
       "forgot-password": "هل نسيت كلمة المرور؟",
       "no-account": "ليس لديك حساب؟",
@@ -31,7 +33,8 @@
       "signup-with-facebook": "سجل بحساب فيسبوك",
       "signup-with-google": "سجل بحساب جوجل"
     },
-    "or-continue": "أو يمكنك التسجيل بواسطة"
+    "or-continue": "أو يمكنك التسجيل بواسطة",
+    "required-error": "هذا الحقل مطلوب"
   },
   "Global": {
     "english-home": "إنجلش هوم"

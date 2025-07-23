@@ -10,16 +10,21 @@ import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { useTranslation } from 'react-i18next';
 import Layout from './layout';
-
-const formSchema = z.object({
-  email: z.email('Invalid email address'),
-  password: z.string().min(6, 'Password must be at least 6 characters long'),
-});
+const useLocalizedSchema = () => {
+  const { t } = useTranslation();
+  return z.object({
+    email: z.email(t('Auth.login-form.email-error')),
+    password: z
+      .string({ error: t('Auth.required-error') })
+      .min(6, t('Auth.login-form.password-error', { maxLen: 6 })),
+  });
+};
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<'form'>) {
+  const formSchema = useLocalizedSchema();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
