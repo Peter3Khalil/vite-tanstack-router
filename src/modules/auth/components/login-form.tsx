@@ -1,6 +1,7 @@
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
+import { PasswordInput } from '@/shared/components/ui/password-input';
 import { Link } from '@/shared/i18n/routing';
 import { cn } from '@/shared/lib/utils';
 
@@ -26,12 +27,12 @@ export function LoginForm({
             <Label htmlFor="password">Password</Label>
             <a
               href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
+              className="ms-auto text-sm underline-offset-4 hover:underline"
             >
               Forgot your password?
             </a>
           </div>
-          <Input id="password" type="password" required />
+          <PasswordInput id="password" required />
         </div>
         <Button type="submit" className="w-full">
           Login

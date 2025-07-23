@@ -1,6 +1,7 @@
 import { Button } from '@/shared/components/ui/button';
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
+import { PasswordInput } from '@/shared/components/ui/password-input';
 import { Link } from '@/shared/i18n/routing';
 import { cn } from '@/shared/lib/utils';
 
@@ -33,7 +34,7 @@ export function SignupForm({
         </div>
         <div className="grid gap-3">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
+          <PasswordInput id="password" required />
         </div>
         <Button type="submit" className="w-full">
           Sign Up
