@@ -2,8 +2,11 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@lib/*": ["./src/lib/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@ui/*": ["./src/shared/components/ui/*"],
+      "@lib/*": ["./src/shared/lib/*"],
+      "@components/*": ["./src/shared/components/*"],
+      "@shared/*": ["./src/shared/*"],
       "@/*": ["./src/*"]
     }
   }

@@ -1,4 +1,4 @@
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@lib/utils';
 import { createFileRoute, Outlet } from '@tanstack/react-router';
 import { GalleryVerticalEnd } from 'lucide-react';
 

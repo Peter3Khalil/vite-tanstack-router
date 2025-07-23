@@ -1,10 +1,10 @@
-import { FacebookIcon, GoogleIcon } from '@/shared/components/icons';
-import { Button } from '@/shared/components/ui/button';
-import { Input } from '@/shared/components/ui/input';
-import { Label } from '@/shared/components/ui/label';
-import { PasswordInput } from '@/shared/components/ui/password-input';
+import { FacebookIcon, GoogleIcon } from '@components/icons';
+import { Button } from '@ui/button';
+import { Input } from '@ui/input';
+import { Label } from '@ui/label';
+import { PasswordInput } from '@ui/password-input';
 import { Link } from '@/shared/i18n/routing';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@lib/utils';
 
 export function SignupForm({
   className,

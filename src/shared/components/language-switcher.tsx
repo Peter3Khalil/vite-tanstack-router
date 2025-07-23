@@ -1,4 +1,3 @@
-'use client';
 import { Link, usePathname } from '@/shared/i18n/routing';
 import { useLocation } from '@tanstack/react-router';
 import i18next from 'i18next';
